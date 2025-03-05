@@ -3,19 +3,32 @@
 
 class rootSolver:
 
-    def __init__(self, leftBoundInclusive, rightBoundInclusive, functionNr):
-        self.leftBoundInclusive = leftBoundInclusive
-        self.rightBoundInclusive = rightBoundInclusive
-        self.functionNr = functionNr
+    def __init__(self, a, b, functionNr, precision):
+        assert self.areValidBounds(a, b)
 
-    def secantMethod(self):
-       self.assertValidBounds()
+        self.a = a
+        self.b = b
+        self.functionNr = functionNr
+        self.precision = precision
 
     def bisectionMethod(self):
-       self.assertValidBounds()
+        
+        result = -1
+        x = None
 
-    def assertValidBounds(self):
-       assert self.leftBoundInclusive * self.rightBoundInclusive < 0 
+        while not -self.precision < result < self.precision
+            """ if(x != None and areValidBounds()) """
+            x = self.a + self.b / 2
+            result = f(x)
+
+
+    def secantMethod(self):
+
+    def areValidBounds(self, a, b):
+        f(a) * f(b) < 0 
+
+    def f(self, x):
+        return x*x;
 
     def print(self):
         print()
