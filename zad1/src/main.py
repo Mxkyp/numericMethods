@@ -16,16 +16,26 @@ class rootSolver:
         result = -1
         x = None
 
-        while not -self.precision < result < self.precision
-            """ if(x != None and areValidBounds()) """
-            x = self.a + self.b / 2
-            result = f(x)
+        while not -self.precision < result < self.precision:
+            if x != None and self.areValidBounds(x, self.b):
+                self.a = x
+            elif x != None and self.areValidBounds(self.a, x):
+                self.b = x
+            elif x != None:
+                raise ValueError()
+
+            x = (self.a + self.b) / 2
+            result = self.f(x)
+            print(x)
+
+        return result
 
 
     def secantMethod(self):
+        pass
 
     def areValidBounds(self, a, b):
-        f(a) * f(b) < 0 
+        return a * b < 0 
 
     def f(self, x):
         return x*x;
@@ -34,5 +44,7 @@ class rootSolver:
         print()
 
 def main():
+    solver = rootSolver(-5, 2, 3, 0.5)
+    print(solver.bisectionMethod())
 
 main()
