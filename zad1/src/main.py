@@ -3,13 +3,17 @@ import math
 
 class rootSolver:
 
-    def __init__(self, a, b, functionNr, precision):
+    def __init__(self, a: int, b: int, functionNr: int, precision: float):
         assert self.areValidBounds(a, b)
 
         self.a = a
         self.b = b
         self.functionNr = functionNr
         self.precision = precision
+
+    
+    def solve():
+        pass
 
     def bisectionMethod(self):
         
@@ -34,10 +38,10 @@ class rootSolver:
         pass
 
     def areValidBounds(self, a, b):
-        return a * b < 0 
+        return self.f(a) * self.f(b)  < 0 
 
     def f(self, x):
-        return x*x;
+        return x * x * x;
 
     def print(self):
         print()
@@ -49,6 +53,7 @@ def main():
     print("3) 2^x - 1/e")
     print("4) e^x * sin(2x) + e^x")
     picked = input()
+
     solver = rootSolver(-5, 2, 3, 0.5)
     print(solver.bisectionMethod())
 
