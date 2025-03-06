@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-
+import math
 
 class rootSolver:
 
@@ -13,7 +13,7 @@ class rootSolver:
 
     def bisectionMethod(self):
         
-        result = -1
+        result = math.inf 
         x = None
 
         while not -self.precision < result < self.precision:
@@ -26,7 +26,6 @@ class rootSolver:
 
             x = (self.a + self.b) / 2
             result = self.f(x)
-            print(x)
 
         return result
 
@@ -44,6 +43,12 @@ class rootSolver:
         print()
 
 def main():
+    print("Hello please pick one of the following functions!:")
+    print("1) x^3 - 2x^2 + 3x - 1")
+    print("2) sin(x) + cos(x)")
+    print("3) 2^x - 1/e")
+    print("4) e^x * sin(2x) + e^x")
+    picked = input()
     solver = rootSolver(-5, 2, 3, 0.5)
     print(solver.bisectionMethod())
 
