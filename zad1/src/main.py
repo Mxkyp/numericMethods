@@ -2,6 +2,7 @@
 import math
 
 class rootSolver:
+    """comment""""
 
     def __init__(self, a, b, functionNr, precision):
         assert self.areValidBounds(a, b)
