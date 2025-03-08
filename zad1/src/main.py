@@ -2,6 +2,9 @@
 import math
 import matplotlib.pyplot as plt
 import numpy as np
+from numpy import number
+from unicodedata import numeric
+
 
 class rootSolver:
 
@@ -29,7 +32,8 @@ class rootSolver:
 
     def f(self, x):
         if self.functionNr == 1:
-            return x ** 3 - 2 * x ** 2 + 3 * x - 1
+            numbers = [1, -2, 3, -1]
+            return self.horner(x, numbers)
         elif self.functionNr == 2:
             return np.sin(x) + np.cos(x)
         elif self.functionNr == 3:
@@ -37,6 +41,13 @@ class rootSolver:
         elif self.functionNr == 4:
             return np.exp(x) * np.sin(2 * x) + np.exp(x)
         return None
+
+    def horner(self, x, numbers):
+        result = 0
+        for num in numbers:
+            result = result * x + num
+        return result
+
 
     def bisectionMethod(self):
 
@@ -132,7 +143,6 @@ class rootSolver:
             point, _ = result2
             plt.scatter(point, self.f(point), color='green', zorder=5, label=f"Zero at x={point:.4f}")
 
-        # Tworzenie wykresu
         plt.plot(x_values, y_values, label="f(x)")
         plt.axhline(0, color='black',linewidth=1)
         plt.axvline(0, color='black',linewidth=1)
