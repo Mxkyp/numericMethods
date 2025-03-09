@@ -18,6 +18,7 @@ class rootSolver:
         self.x0 = x0
         self.x1 = x1
 
+        assert self.areValidBounds(a, b)
         if (stopTypeNr == 1):
             self.precision = iterOrPrecision
             self.iterCount = 100000
@@ -25,7 +26,6 @@ class rootSolver:
             self.iterCount = int(iterOrPrecision)
             self.precision = 1e-5
 
-            assert self.areValidBounds(a, b)
 
     def solve(self):
         pass
@@ -115,7 +115,7 @@ class rootSolver:
 
             x2 = x1-f_x1*(x1-x0)/(f_x1-f_x0)
 
-            if abs(f_x1) < self.precision:
+            if abs(f_x1) < self.precision and self.a <= x1 <= self.b: 
                 return x1, iterations_ran
 
             x0 = x1
