@@ -26,10 +26,6 @@ class rootSolver:
             self.iterCount = int(iterOrPrecision)
             self.precision = 1e-5
 
-
-    def solve(self):
-        pass
-
     def f(self, x):
         if self.functionNr == 1:
             numbers = [1, -2, 3, -1]
@@ -48,7 +44,6 @@ class rootSolver:
             result = result * x + num
         return result
 
-
     def bisectionMethod(self):
 
         a = self.a
@@ -63,7 +58,7 @@ class rootSolver:
                 f_x = self.f(x)
 
                 if abs(f_x) < self.precision:
-                    return x, iterations_ran
+                    return x, iterations_ran, self.f(x)
 
                 if self.f(a) * self.f(x) < 0:
                     b = x
@@ -72,16 +67,12 @@ class rootSolver:
 
                 iterations_ran += 1
 
-            return x, iterations_ran
+            return x, iterations_ran, self.f(x)
         else:
             return print("function has no zero point")
 
     def areValidBounds(self, a, b):
         return self.f(a) * self.f(b) < 0
-
-
-    def print(self):
-        print()
 
     def check_derivative(self, functionNr, x):
         if(functionNr == 1):
@@ -116,14 +107,14 @@ class rootSolver:
             x2 = x1-f_x1*(x1-x0)/(f_x1-f_x0)
 
             if abs(f_x1) < self.precision and self.a <= x1 <= self.b: 
-                return x1, iterations_ran
+                return x1, iterations_ran, self.f(x1)
 
             x0 = x1
             x1 = x2
 
             iterations_ran += 1
 
-        return x1, iterations_ran
+        return x1, iterations_ran, self.f(x1)
 
 
     def plotFunction(self):
@@ -132,16 +123,16 @@ class rootSolver:
         vectorized_f = np.vectorize(self.f)
         y_values = vectorized_f(x_values)
 
-        result1 = self.bisectionMethod()
-        result2 = self.secantMethod()
+        resultBisection = self.bisectionMethod()
+        resultSecant = self.secantMethod()
 
-        if result1 is not None:
-            point, _ = result1
-            plt.scatter(point, self.f(point), color='red', zorder=5, label=f"Zero at x={point:.4f}")
+        if resultBisection is not None:
+            x1, iter_count1, f_x1 = resultBisection
+            self.markPoint(x1, f_x1, iter_count1, "red", "B")
 
-        if result2 is not None:
-            point, _ = result2
-            plt.scatter(point, self.f(point), color='green', zorder=5, label=f"Zero at x={point:.4f}")
+        if resultSecant is not None:
+            x2, iter_count2, f_x2  = resultSecant
+            self.markPoint(x2, f_x2, iter_count2, "green", "S")
 
         plt.plot(x_values, y_values, label="f(x)")
         plt.axhline(0, color='black',linewidth=1)
@@ -152,6 +143,10 @@ class rootSolver:
         plt.legend()
         plt.grid(True)
         plt.show()
+
+
+    def markPoint(self, x: float, f_x: float, iter_count: int, colorPicked: str, mark: str):
+            plt.scatter(x, f_x, color = colorPicked, zorder=5, label=mark + " " + f"{f_x:.4f} at x={x:.4f}, iter = {iter_count}")
 
 
 def main():
@@ -184,8 +179,6 @@ def main():
 
         # solver = rootSolver(-5, 2, 3, 0.5)
     solver = rootSolver(functionNr, a, b, stopTypeNr, x0, x1, iterOrPrecision)
-    print(solver.bisectionMethod())
-    print(solver.secantMethod())
     solver.plotFunction()
 
 main()
