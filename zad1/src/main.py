@@ -35,7 +35,7 @@ class rootSolver:
         elif self.functionNr == 3:
             return 2 ** x - 1 / math.e
         elif self.functionNr == 4:
-            return np.exp(x) * np.sin(2 * x) + np.exp(x)
+            return np.exp(x) * np.sin(2 * x) + np.exp(x) - 3
         return None
 
     def horner(self, x, numbers):
@@ -154,7 +154,7 @@ def main():
     print("1) x^3 - 2x^2 + 3x - 1")
     print("2) sin(x) + cos(x)")
     print("3) 2^x - 1/e")
-    print("4) e^x * sin(2x) + e^x")
+    print("4) e^x * sin(2x) + e^x - 3")
 
     functionNr = int(input())
 
