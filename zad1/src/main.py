@@ -21,7 +21,7 @@ class rootSolver:
         assert self.areValidBounds(a, b)
         if (stopTypeNr == 1):
             self.precision = iterOrPrecision
-            self.iterCount = 100000
+            self.iterCount = 2000000
         elif (stopTypeNr == 2):
             self.iterCount = int(iterOrPrecision)
             self.precision = 1e-5
