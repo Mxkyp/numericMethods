@@ -52,24 +52,21 @@ class rootSolver:
         x = None
         iterations_ran = 0
 
-        if self.areValidBounds(a, b):
-            while iterations_ran < self.iterCount:
-                x = (a + b) / 2
-                f_x = self.f(x)
+        while iterations_ran < self.iterCount:
+            x = (a + b) / 2
+            f_x = self.f(x)
 
-                if abs(f_x) < self.precision:
-                    return x, iterations_ran, self.f(x)
+            if abs(f_x) < self.precision:
+                return x, iterations_ran, self.f(x)
 
-                if self.f(a) * self.f(x) < 0:
-                    b = x
-                else:
-                    a = x
+            if self.f(a) * self.f(x) < 0:
+                b = x
+            else:
+                a = x
 
-                iterations_ran += 1
+            iterations_ran += 1
 
-            return x, iterations_ran, self.f(x)
-        else:
-            return print("function has no zero point")
+        return x, iterations_ran, self.f(x)
 
     def areValidBounds(self, a, b):
         return self.f(a) * self.f(b) < 0
@@ -137,7 +134,7 @@ class rootSolver:
         plt.plot(x_values, y_values, label="f(x)")
         plt.axhline(0, color='black',linewidth=1)
         plt.axvline(0, color='black',linewidth=1)
-        plt.title(f'Plot of the selected function (f{x_values[0]} to f{x_values[-1]})')
+        plt.title(f'Plot of the selected function <{x_values[0]}, {x_values[-1]}>')
         plt.xlabel("x")
         plt.ylabel("f(x)")
         plt.legend()
