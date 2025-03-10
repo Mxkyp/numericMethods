@@ -71,6 +71,16 @@ class rootSolver:
     def areValidBounds(self, a, b):
         return self.f(a) * self.f(b) < 0
 
+    def check_derivative(self, functionNr, x):
+        if(functionNr == 1):
+            return 3*x**2 - 4*x + 3
+        if(functionNr == 2):
+            return math.cos(x) - math.sin(x)
+        if(functionNr == 3):
+            return math.log(2) * 2**x
+        if(functionNr == 4):
+            return math.exp(x) * (2 * math.cos(2 * x) + math.sin(2 * x)) + math.exp(x)
+
     def secantMethod(self):
 
         x0 = self.x0
@@ -78,7 +88,7 @@ class rootSolver:
 
         iterations_ran = 0
 
-        for i in range(int to(self.iterCount)):
+        for i in range(int(self.iterCount)):
             f_x0 = self.f(x0)
             f_x1 = self.f(x1)
 
